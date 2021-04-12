@@ -108,32 +108,41 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    Modular.to.pushNamed('/home');
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Modular.to.pushNamed('/home');
+                      },
+                      child: Text(
+                        'Cancelar',
+                        style:
+                            TextStyle(color: BalaioTheme.primary, fontSize: 22),
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                        color: BalaioTheme.primary,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Salvar alterações',
-                          style: TextStyle(
-                            color: BalaioTheme.white,
-                            fontSize: 18,
+                    TextButton(
+                      onPressed: () {
+                        Modular.to.pushNamed('/home');
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: BalaioTheme.primary,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
                           ),
                         ),
-                      ],
+                        child: Text(
+                          'Salvar alterações',
+                          style:
+                              TextStyle(color: BalaioTheme.white, fontSize: 22),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  ],
+                )
               ],
             ),
           ),

@@ -13,7 +13,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   bool terms = false;
 
-  void toggleTerms(bool val) {
+  void toggleTerms() {
     setState(() {
       terms = !terms;
     });
@@ -77,7 +77,7 @@ class _AuthPageState extends State<AuthPage> {
                     Row(children: [
                       Checkbox(
                         value: terms,
-                        onChanged: (e) => toggleTerms,
+                        onChanged: (e) => toggleTerms(),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * .75,

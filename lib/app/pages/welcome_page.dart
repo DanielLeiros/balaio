@@ -9,7 +9,7 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          padding: EdgeInsets.only(top: 100, left: 30, right: 30, bottom: 10),
+          padding: EdgeInsets.only(top: 100, left: 15, right: 15, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
