@@ -6,8 +6,12 @@ class CustomInput extends StatefulWidget {
   String fieldName = '';
   Function onChange = () {};
   bool? enebled;
-
-  CustomInput({required this.fieldName, required this.onChange, this.enebled})
+  int? maxLines;
+  CustomInput(
+      {required this.fieldName,
+      required this.onChange,
+      this.enebled,
+      this.maxLines})
       : super();
 
   @override
@@ -18,8 +22,12 @@ class _CustomInputState extends State<CustomInput> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(widget.fieldName + ': '),
+      Text(
+        widget.fieldName + ': ',
+        style: TextStyle(fontSize: 18),
+      ),
       TextField(
+        maxLines: widget.maxLines ?? 1,
         enabled: widget.enebled ?? true,
         onChanged: widget.onChange(),
         decoration: InputDecoration(

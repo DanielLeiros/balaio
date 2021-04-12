@@ -2,6 +2,7 @@ import 'package:balaio/app/pages/auth_page.dart';
 import 'package:balaio/app/pages/home_page.dart';
 import 'package:balaio/app/pages/profile_page.dart';
 import 'package:balaio/app/pages/menu.dart';
+import 'package:balaio/app/pages/start_page.dart';
 import 'package:balaio/app/pages/welcome_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,7 +14,8 @@ class AppModule extends Module {
   // Provide all the routes for your module
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => WelcomePage()),
+    ChildRoute('/', child: (_, __) => StartPage()),
+    ChildRoute('/welcome', child: (_, __) => WelcomePage()),
     ChildRoute('/auth', child: (_, __) => AuthPage()),
     ChildRoute('/home', child: (_, __) => HomePage()),
     ChildRoute('/menu',

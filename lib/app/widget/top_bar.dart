@@ -1,7 +1,6 @@
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({

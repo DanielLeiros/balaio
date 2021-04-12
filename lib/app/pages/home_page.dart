@@ -1,6 +1,7 @@
 import 'package:balaio/app/widget/map_view.dart';
 import 'package:balaio/app/widget/top_bar.dart';
 import 'package:balaio/theme/theme.dart';
+import 'package:balaio/app/pages/send_dialog.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,8 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final double iconSize = 28;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -78,7 +77,11 @@ class _HomePageState extends State<HomePage> {
                   color: BalaioTheme.white,
                 ),
                 onPressed: () {
-                  print('New BalaiO');
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SendDialog();
+                      });
                 }),
           ]),
     );

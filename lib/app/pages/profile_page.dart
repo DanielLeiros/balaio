@@ -34,62 +34,79 @@ class _ProfilePageState extends State<ProfilePage> {
                 const EdgeInsets.only(top: 50, left: 15, right: 15, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  'images/logo_n_bg.png',
-                  scale: 7,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                CircularImage(),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Balaios encontrados',
-                  style: subTextStyle,
-                ),
-                Text(
-                  '8',
-                  style: subTextStyle,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
+                Column(
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * .8,
-                      child: CustomInput(
-                        enebled: editingName,
-                        fieldName: 'Nome',
-                        onChange: () {},
-                      ),
+                    Image.asset(
+                      'images/logo_n_bg.png',
+                      scale: 7,
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.create,
-                        size: 30,
-                        color: BalaioTheme.black,
+                    SizedBox(
+                      height: 30,
+                    ),
+                    CircularImage(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Balaios encontrados',
+                      style: subTextStyle,
+                    ),
+                    Text(
+                      '8',
+                      style: subTextStyle,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * .8,
+                          child: CustomInput(
+                            enebled: editingName,
+                            fieldName: 'Nome',
+                            onChange: () {},
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.create,
+                            size: 33,
+                            color: BalaioTheme.black,
+                          ),
+                          onPressed: () => toggleEditingName(),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Numero: ",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                    InternationalPhoneNumberInput(
+                      isEnabled: false,
+                      hintText: '(DD) número telefônico',
+                      initialValue: PhoneNumber(
+                        isoCode: 'BR',
                       ),
-                      onPressed: () => toggleEditingName(),
-                    )
+                      onInputChanged: (e) => print(e.isoCode),
+                      inputBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
+                    SizedBox(
+                      height: 110,
+                    ),
                   ],
-                ),
-                SizedBox(height: 20),
-                InternationalPhoneNumberInput(
-                  isEnabled: false,
-                  hintText: '(DD) número telefônico',
-                  initialValue: PhoneNumber(
-                    isoCode: 'BR',
-                  ),
-                  onInputChanged: (e) => print(e.isoCode),
-                  inputBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                ),
-                SizedBox(
-                  height: 110,
                 ),
                 TextButton(
                   onPressed: () {
