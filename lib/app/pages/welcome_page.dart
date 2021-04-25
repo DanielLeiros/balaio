@@ -25,7 +25,7 @@ class WelcomePage extends StatelessWidget {
                     scale: 3,
                   ),
                   Text(
-                      'BalaiO tem como proposta permitir uma nova forma de manifestar-se amor digitalmente. Deixa bilhetes em locais que passar para pessoas especiais. Relembre bons momentos e espalhe carinho em todos os Balaios. ',
+                      'BalaiO tem como proposta permitir uma nova forma para manifestar amor digitalmente. Relembre bons momentos e espalhe carinho em todos os BalaiOs. ',
                       style: TextStyle(fontSize: 18, color: BalaioTheme.gray),
                       textAlign: TextAlign.center),
                 ],

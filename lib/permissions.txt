@@ -1,0 +1,21 @@
+android
+<uses-permission android:name="android.permission.READ_CONTACTS" />  
+<uses-permission android:name="android.permission.WRITE_CONTACTS" />  
+
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+
+
+IOS
+<key>NSContactsUsageDescription</key>  
+<string>This app requires contacts access to function properly.</string> 
+<key>NSLocationWhenInUseUsageDescription</key>
+    <string>Need location when in use</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Always and when in use!</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Older devices need location.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Can I haz location always?</string>

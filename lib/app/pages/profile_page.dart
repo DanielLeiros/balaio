@@ -45,7 +45,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: 30,
                     ),
-                    CircularImage(),
+                    CircularImage(
+                      path: 'images/eu.png',
+                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -97,8 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       isEnabled: false,
                       hintText: '(DD) número telefônico',
                       initialValue: PhoneNumber(
-                        isoCode: 'BR',
-                      ),
+                          isoCode: 'BR', phoneNumber: '84991628702'),
                       onInputChanged: (e) => print(e.isoCode),
                       inputBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),

@@ -10,16 +10,19 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^3.0.2+1
+  mobx: ^2.0.1
   map: any
   cached_network_image: ^3.0.0
   geolocator: ^7.0.1
   fab_circular_menu: ^1.0.2
-  intl_phone_number_input: ^0.7.0+1
+  intl_phone_number_input: any
+  contacts_service: ^0.6.0
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
 
 
 flutter:

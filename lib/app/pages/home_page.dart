@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:balaio/app/service/location.dart';
 import 'package:balaio/app/widget/map_view.dart';
 import 'package:balaio/app/widget/top_bar.dart';
 import 'package:balaio/theme/theme.dart';
@@ -12,6 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Location service = Location();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

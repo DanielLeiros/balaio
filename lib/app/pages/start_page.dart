@@ -5,8 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-        Duration(seconds: 3), () => Modular.to.pushNamed('/welcome'));
+    Future.delayed(Duration(seconds: 3), () => Modular.to.pushNamed('/auth'));
     return Container(
       color: Colors.white,
       child: Center(

@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
+  Iterable<String?> listElements = [];
+
+  Dropdown({required this.listElements}) : super();
+
   @override
   _DropdownState createState() => _DropdownState();
 }
@@ -24,7 +28,10 @@ class _DropdownState extends State<Dropdown> {
             width: MediaQuery.of(context).size.width,
             child: DropdownButton<String>(
               value: dropdownValue,
-              hint: Text('Selecione um contato'),
+              hint: Text(
+                'Selecione um contato',
+                style: TextStyle(fontSize: 18),
+              ),
               iconSize: 24,
               elevation: 16,
               style: const TextStyle(color: Colors.deepPurple),
@@ -37,11 +44,11 @@ class _DropdownState extends State<Dropdown> {
                   dropdownValue = newValue!;
                 });
               },
-              items: <String>['One', 'Two', 'Free', 'Four']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: widget.listElements
+                  .map<DropdownMenuItem<String>>((String? value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(value ?? ' ', style: TextStyle(fontSize: 18)),
                 );
               }).toList(),
             ),
