@@ -1,15 +1,36 @@
 import 'package:balaio/app/pages/menu.dart';
-import 'package:balaio/app/widget/map_view.dart';
 import 'package:balaio/app/widget/top_bar.dart';
+import 'package:balaio/app/widget/msg_viewer.dart';
 import 'package:balaio/theme/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:balaio/app/service/balaio_controller.dart';
 
-class HomePage extends StatefulWidget {
+class MuralPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MuralPageState createState() => _MuralPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MuralPageState extends ModularState<MuralPage, BalaioController> {
+  List<Widget> generateMessageList() {
+    List<Widget> msgs = [];
+    controller.getMessages().forEach((e) => msgs.add(
+          Container(
+            padding: EdgeInsets.all(5),
+            child: MsgViewer(
+              msg: e.msg,
+              date: e.date,
+            ),
+          ),
+        ));
+    msgs.add(SizedBox(
+      height: 80,
+    ));
+
+    return msgs;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,11 +57,18 @@ class _HomePageState extends State<HomePage> {
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                 ),
-                child: MapView(),
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: generateMessageList(),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-          Menu(),
+          Menu(index: 2),
         ],
       ),
     );

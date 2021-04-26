@@ -1,81 +1,168 @@
-import 'package:balaio/app/widget/top_bar.dart';
+import 'package:balaio/app/pages/send_dialog.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class Menu extends StatelessWidget {
-  final double iconSize = 30;
+class Menu extends StatefulWidget {
+  final int index;
 
-  final List<Map<String, dynamic>> items = [
-    {"campo": "Mural", "path": "/mural", "icon": Icons.apps},
-    {"campo": "Perfil", "path": "/perfil", "icon": Icons.person},
-    {"campo": "Configurações", "path": "/config", "icon": Icons.settings},
-    {"campo": "Perguntas freq.", "path": "/faq", "icon": Icons.question_answer},
-  ];
+  Menu({this.index = 0});
 
-  Widget getMenuItem(e) {
-    return TextButton.icon(
-        label: Text(
-          e['campo'],
-          style: TextStyle(fontSize: 18, color: BalaioTheme.white),
-        ),
-        icon: Icon(
-          e['icon'],
-          color: BalaioTheme.white,
-        ),
-        onPressed: () => Modular.to.pushNamed(
-              e['path'],
-            ));
+  @override
+  _MenuState createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  int currentIndex = 0;
+
+  setBottomBarIndex(index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      currentIndex = widget.index;
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: [
-        Container(
-          color: BalaioTheme.primary,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TopBar(
-                  mainIcon: Icons.close,
-                  mainPress: () => Modular.to.maybePop(),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 30,
-                    horizontal: 15,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      getMenuItem(items[0]),
-                      getMenuItem(items[1]),
-                      getMenuItem(items[2]),
-                      getMenuItem(items[3]),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Divider(
-                    color: BalaioTheme.white,
-                    height: 50,
-                    thickness: 1,
-                    indent: 20,
-                    endIndent: 20,
-                  ),
-                )
-              ],
+    final Size size = MediaQuery.of(context).size;
+
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(1.0, 0.0), //(x,y)
+              blurRadius: 88.0,
             ),
-          ),
+          ],
         ),
-      ]),
+        width: size.width,
+        height: 80,
+        child: Stack(
+          children: [
+            CustomPaint(
+              size: Size(size.width, 80),
+              painter: BNBCustomPainter(),
+            ),
+            Center(
+              heightFactor: 0.6,
+              child: FloatingActionButton(
+                  backgroundColor: BalaioTheme.primary,
+                  child: Icon(
+                    Icons.add,
+                    size: 33,
+                  ),
+                  elevation: 0.1,
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SendDialog();
+                        });
+                  }),
+            ),
+            Container(
+              width: size.width,
+              height: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.home,
+                      size: 33,
+                      color: currentIndex == 0
+                          ? BalaioTheme.primary
+                          : BalaioTheme.gray,
+                    ),
+                    onPressed: () {
+                      setBottomBarIndex(0);
+                      Modular.to.pushNamed('/home');
+                    },
+                    splashColor: Colors.white,
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        size: 33,
+                        color: currentIndex == 1
+                            ? BalaioTheme.primary
+                            : BalaioTheme.gray,
+                      ),
+                      onPressed: () {
+                        Modular.to.pushNamed('/perfil');
+                      }),
+                  Container(
+                    width: size.width * 0.20,
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.grid_view,
+                        size: 33,
+                        color: currentIndex == 2
+                            ? BalaioTheme.primary
+                            : BalaioTheme.gray,
+                      ),
+                      onPressed: () {
+                        setBottomBarIndex(2);
+                        Modular.to.pushNamed('/mural');
+                      }),
+                  IconButton(
+                      icon: Icon(
+                        Icons.notifications,
+                        size: 33,
+                        color: currentIndex == 3
+                            ? BalaioTheme.primary
+                            : BalaioTheme.gray,
+                      ),
+                      onPressed: () {
+                        setBottomBarIndex(3);
+                      }),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
+  }
+}
+
+class BNBCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = new Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+
+    Path path = Path();
+    path.moveTo(0, 20); // Start
+    path.quadraticBezierTo(size.width * 0.20, 0, size.width * 0.35, 0);
+    path.quadraticBezierTo(size.width * 0.40, 0, size.width * 0.40, 20);
+    path.arcToPoint(Offset(size.width * 0.60, 20),
+        radius: Radius.circular(20.0), clockwise: false);
+    path.quadraticBezierTo(size.width * 0.60, 0, size.width * 0.65, 0);
+    path.quadraticBezierTo(size.width * 0.80, 0, size.width, 20);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.lineTo(0, 20);
+    canvas.drawShadow(path, BalaioTheme.black, 5, true);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

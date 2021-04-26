@@ -95,7 +95,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Modular.to.pushNamed('/home');
+                    Modular.to.popAndPushNamed('/home');
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

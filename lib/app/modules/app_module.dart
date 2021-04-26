@@ -1,15 +1,18 @@
 import 'package:balaio/app/pages/auth_page.dart';
 import 'package:balaio/app/pages/home_page.dart';
+import 'package:balaio/app/pages/mural_page.dart';
 import 'package:balaio/app/pages/profile_page.dart';
-import 'package:balaio/app/pages/menu.dart';
 import 'package:balaio/app/pages/start_page.dart';
 import 'package:balaio/app/pages/welcome_page.dart';
+import 'package:balaio/app/service/balaio_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
   // Provide a list of dependencies to inject into your project
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    Bind.singleton((i) => BalaioController()),
+  ];
 
   // Provide all the routes for your module
   @override
@@ -18,11 +21,9 @@ class AppModule extends Module {
     ChildRoute('/welcome', child: (_, __) => WelcomePage()),
     ChildRoute('/auth', child: (_, __) => AuthPage()),
     ChildRoute('/home', child: (_, __) => HomePage()),
-    ChildRoute('/menu',
-        child: (_, __) => Menu(), transition: TransitionType.upToDown),
-    ChildRoute('/mural', child: (_, __) => Menu()),
+    ChildRoute('/mural', child: (_, __) => MuralPage()),
     ChildRoute('/perfil', child: (_, __) => ProfilePage()),
-    ChildRoute('/config', child: (_, __) => Menu()),
-    ChildRoute('/faq', child: (_, __) => Menu()),
+    ChildRoute('/config', child: (_, __) => HomePage()),
+    ChildRoute('/faq', child: (_, __) => HomePage()),
   ];
 }
