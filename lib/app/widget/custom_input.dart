@@ -7,11 +7,15 @@ class CustomInput extends StatefulWidget {
   Function onChange = () {};
   bool? enebled;
   int? maxLines;
+  String? hint;
+  TextEditingController? controller;
   CustomInput(
       {required this.fieldName,
       required this.onChange,
       this.enebled,
-      this.maxLines})
+      this.maxLines,
+      this.hint,
+      this.controller})
       : super();
 
   @override
@@ -27,10 +31,12 @@ class _CustomInputState extends State<CustomInput> {
         style: TextStyle(fontSize: 18),
       ),
       TextField(
+        controller: widget.controller ?? null,
         maxLines: widget.maxLines ?? 1,
         enabled: widget.enebled ?? true,
-        onChanged: widget.onChange(),
+        onChanged: (e) => widget.onChange(e),
         decoration: InputDecoration(
+            hintText: widget.hint ?? 'Digite aqui',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),

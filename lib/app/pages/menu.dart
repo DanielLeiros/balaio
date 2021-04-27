@@ -128,6 +128,7 @@ class _MenuState extends State<Menu> {
                       ),
                       onPressed: () {
                         setBottomBarIndex(3);
+                        Modular.to.pushNamed('/notificacoes');
                       }),
                 ],
               ),

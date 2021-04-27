@@ -1,3 +1,4 @@
+import 'package:balaio/app/service/balaio_controller.dart';
 import 'package:balaio/app/widget/custom_input.dart';
 import 'package:balaio/app/widget/circular_image.dart';
 import 'package:balaio/theme/theme.dart';
@@ -10,9 +11,10 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
   bool terms = false;
   bool editingName = false;
+  String name = '';
 
   TextStyle subTextStyle = TextStyle(fontSize: 15, color: BalaioTheme.gray);
 
@@ -22,8 +24,15 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  initName() {
+    name = controller.nome;
+    print(name);
+  }
+
   @override
   Widget build(BuildContext context) {
+    initName();
+    final nameController = TextEditingController(text: name);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -68,9 +77,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         Container(
                           width: MediaQuery.of(context).size.width * .8,
                           child: CustomInput(
+                            controller: nameController,
                             enebled: editingName,
                             fieldName: 'Nome',
-                            onChange: () {},
+                            onChange: (e) {
+                              setState(() => name = e);
+                            },
                           ),
                         ),
                         IconButton(
@@ -99,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       isEnabled: false,
                       hintText: '(DD) número telefônico',
                       initialValue: PhoneNumber(
-                          isoCode: 'BR', phoneNumber: '84991628702'),
+                          isoCode: 'BR', phoneNumber: controller.numero),
                       onInputChanged: (e) => print(e.isoCode),
                       inputBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -124,6 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     TextButton(
                       onPressed: () {
+                        controller.setUser(name, controller.numero, '');
                         Modular.to.pushNamed('/home');
                       },
                       child: Container(

@@ -1,6 +1,7 @@
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class TopBar extends StatelessWidget {
   final double iconSize = 30;
@@ -13,7 +14,7 @@ class TopBar extends StatelessWidget {
         Row(children: [
           Image.asset(
             'images/logo_inv.png',
-            scale: 12,
+            scale: 9,
           ),
         ]),
         IconButton(
@@ -22,7 +23,9 @@ class TopBar extends StatelessWidget {
             color: BalaioTheme.white,
             size: iconSize,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Modular.to.pushNamed('/config');
+          },
         ),
       ],
     );

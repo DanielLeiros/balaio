@@ -1,6 +1,8 @@
 import 'package:balaio/app/pages/auth_page.dart';
 import 'package:balaio/app/pages/home_page.dart';
 import 'package:balaio/app/pages/mural_page.dart';
+import 'package:balaio/app/pages/config_page.dart';
+import 'package:balaio/app/pages/notification_page.dart';
 import 'package:balaio/app/pages/profile_page.dart';
 import 'package:balaio/app/pages/start_page.dart';
 import 'package:balaio/app/pages/welcome_page.dart';
@@ -23,7 +25,7 @@ class AppModule extends Module {
     ChildRoute('/home', child: (_, __) => HomePage()),
     ChildRoute('/mural', child: (_, __) => MuralPage()),
     ChildRoute('/perfil', child: (_, __) => ProfilePage()),
-    ChildRoute('/config', child: (_, __) => HomePage()),
-    ChildRoute('/faq', child: (_, __) => HomePage()),
+    ChildRoute('/config', child: (_, __) => ConfigPage()),
+    ChildRoute('/notificacoes', child: (_, __) => NotificationPage()),
   ];
 }

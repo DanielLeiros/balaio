@@ -1,3 +1,5 @@
+import 'package:balaio/app/service/balaio_controller.dart';
+import 'package:balaio/app/service/balaio_service.dart';
 import 'package:balaio/app/widget/custom_input.dart';
 import 'package:balaio/app/widget/circular_image.dart';
 import 'package:balaio/theme/theme.dart';
@@ -10,13 +12,26 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _AuthPageState extends ModularState<AuthPage, BalaioController> {
+  String phoneNumber = '';
+  String name = '';
   bool terms = false;
 
   void toggleTerms() {
     setState(() {
       terms = !terms;
     });
+  }
+
+  bool fieldsOk() {
+    return terms && name.isNotEmpty && phoneNumber.isNotEmpty;
+  }
+
+  void confirmAuth() {
+    if (fieldsOk()) {
+      controller.setUser(name, phoneNumber, '');
+      Modular.to.popAndPushNamed('/home');
+    }
   }
 
   @override
@@ -47,33 +62,14 @@ class _AuthPageState extends State<AuthPage> {
                       height: 50,
                     ),
                     CustomInput(
-                      fieldName: 'Nome',
-                      onChange: () {},
-                    ),
+                        fieldName: 'Nome',
+                        onChange: (e) => setState(() => name = e)),
                     SizedBox(height: 30),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Numero: ",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                    InternationalPhoneNumberInput(
-                      hintText: '(DD) número telefônico',
-                      initialValue: PhoneNumber(
-                        isoCode: 'BR',
-                      ),
-                      onInputChanged: (e) => print(e.isoCode),
-                      inputBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
+                    CustomInput(
+                        fieldName: 'Número',
+                        hint: '(84) 91234-0000',
+                        onChange: (e) => setState(() => phoneNumber = e)),
+                    SizedBox(height: 30),
                     Row(children: [
                       Checkbox(
                         value: terms,
@@ -94,16 +90,19 @@ class _AuthPageState extends State<AuthPage> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
-                    Modular.to.popAndPushNamed('/home');
-                  },
+                  onPressed: terms
+                      ? () {
+                          confirmAuth();
+                        }
+                      : null,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(
                       vertical: 20,
                     ),
                     decoration: BoxDecoration(
-                        color: BalaioTheme.primary,
+                        color:
+                            fieldsOk() ? BalaioTheme.primary : BalaioTheme.gray,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
