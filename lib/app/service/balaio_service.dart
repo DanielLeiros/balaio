@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:balaio/app/service/balaio_controller.dart';
+import 'package:balaio/app/service/balaio_store.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,6 +24,8 @@ class BalaioService {
         controller.numero = number;
         controller.userId = transient.toString();
         controller.transientUser = transient.toString();
+        controller.setStoreData(name, number, transient.toString());
+        controller.setUser(name, number, transient.toString());
       }
       return true;
     } on Exception catch (_) {
@@ -70,7 +73,7 @@ class BalaioService {
           await Fluttertoast.showToast(
             msg: "Você recebeu um novo Balaio!!",
           );
-          controller.unreadBalaios++;
+          Modular.get<BalaioStore>().unreadBalaios++;
         }
         return true;
       } catch (_) {
@@ -86,7 +89,7 @@ class BalaioService {
       try {
         var response = await http.get(uri);
         List<dynamic> balaios = json.decode(response.body);
-        controller.balaiosFound = balaios.length;
+        Modular.get<BalaioStore>().balaiosFound = balaios.length;
         return balaios;
       } catch (_) {
         return [];

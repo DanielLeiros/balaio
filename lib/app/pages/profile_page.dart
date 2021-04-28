@@ -1,9 +1,11 @@
 import 'package:balaio/app/pages/menu.dart';
 import 'package:balaio/app/service/balaio_controller.dart';
+import 'package:balaio/app/service/balaio_store.dart';
 import 'package:balaio/app/widget/custom_input.dart';
 import 'package:balaio/app/widget/circular_image.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -25,9 +27,17 @@ class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController(text: controller.nome);
-    final numController = TextEditingController(text: controller.numero);
+    final nameController =
+        TextEditingController(text: Modular.get<BalaioStore>().nome);
+    final numController =
+        TextEditingController(text: Modular.get<BalaioStore>().numero);
     return Scaffold(
       body: Stack(
         children: [
@@ -59,9 +69,11 @@ class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
                           'Balaios encontrados',
                           style: subTextStyle,
                         ),
-                        Text(
-                          controller.balaiosFound.toString(),
-                          style: subTextStyle,
+                        Observer(
+                          builder: (_) => Text(
+                            Modular.get<BalaioStore>().balaiosFound.toString(),
+                            style: subTextStyle,
+                          ),
                         ),
                         SizedBox(
                           height: 30,

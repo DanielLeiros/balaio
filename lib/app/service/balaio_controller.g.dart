@@ -157,11 +157,11 @@ mixin _$BalaioController on _BalaioControllerBase, Store {
       ActionController(name: '_BalaioControllerBase');
 
   @override
-  void setNameNumber(String name, String number, String path) {
+  void setStoreData(String nome, String numero, String id) {
     final _$actionInfo = _$_BalaioControllerBaseActionController.startAction(
-        name: '_BalaioControllerBase.setNameNumber');
+        name: '_BalaioControllerBase.setStoreData');
     try {
-      return super.setNameNumber(name, number, path);
+      return super.setStoreData(nome, numero, id);
     } finally {
       _$_BalaioControllerBaseActionController.endAction(_$actionInfo);
     }

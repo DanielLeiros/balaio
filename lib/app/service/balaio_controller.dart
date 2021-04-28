@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:balaio/app/models/notification_model.dart';
 import 'package:balaio/app/service/balaio_service.dart';
+import 'package:balaio/app/service/balaio_store.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:latlng/latlng.dart';
@@ -42,10 +44,11 @@ abstract class _BalaioControllerBase with Store {
   }
 
   @action
-  void setNameNumber(String name, String number, String path) {
-    nome = name;
-    numero = number;
-    this.path = path;
+  void setStoreData(String nome, String numero, String id) {
+    BalaioStore store = Modular.get<BalaioStore>();
+    store.nome = nome;
+    store.numero = numero;
+    store.userId = id;
   }
 
   @action
@@ -61,12 +64,17 @@ abstract class _BalaioControllerBase with Store {
   @action
   Future<void> getLocalSystemData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    BalaioStore store = Modular.get<BalaioStore>();
     nome = prefs.getString('nome') ?? '';
     numero = prefs.getString('numero') ?? '';
     path = prefs.getString('path') ?? '';
     userId = prefs.getString('userId') ?? '';
     isLogged = prefs.getBool('isLogged') ?? false;
-    print('$nome $numero $userId $isLogged');
+    if (nome == '') {
+      nome = store.nome;
+      numero = store.numero;
+      userId = store.userId;
+    }
   }
 
   Future<void> userExit() async {
@@ -74,12 +82,11 @@ abstract class _BalaioControllerBase with Store {
     await prefs.clear();
   }
 
-  Future<void> setUser() async {
+  Future<void> setUser(String nome, String numero, String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('nome', this.nome);
-    prefs.setString('numero', this.numero);
-    prefs.setString('path', path);
-    prefs.setString('userId', transientUser);
+    prefs.setString('nome', nome);
+    prefs.setString('numero', numero);
+    prefs.setString('userId', id);
     prefs.setBool('isLogged', true);
   }
 

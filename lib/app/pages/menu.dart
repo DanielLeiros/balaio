@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:balaio/app/pages/send_dialog.dart';
 import 'package:balaio/app/service/balaio_controller.dart';
+import 'package:balaio/app/service/balaio_store.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    BalaioStore store = Modular.get<BalaioStore>();
 
     return Positioned(
       bottom: 0,
@@ -114,10 +116,10 @@ class _MenuState extends State<Menu> {
                     return Badge(
                       badgeColor: BalaioTheme.primary,
                       badgeContent: Text(
-                        widget.controller.unreadBalaios.toString(),
+                        store.unreadBalaios.toString(),
                         style: TextStyle(color: BalaioTheme.white),
                       ),
-                      showBadge: widget.controller.unreadBalaios > 0,
+                      showBadge: store.unreadBalaios > 0,
                       child: Icon(
                         Icons.grid_view,
                         size: 33,
@@ -127,7 +129,7 @@ class _MenuState extends State<Menu> {
                       ),
                     );
                   }), onPressed: () {
-                    widget.controller.unreadBalaios = 0;
+                    store.unreadBalaios = 0;
                     setBottomBarIndex(2);
                     Modular.to.pushNamed('/mural');
                   }),

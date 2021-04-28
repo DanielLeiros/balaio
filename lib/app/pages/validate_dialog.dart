@@ -45,7 +45,6 @@ class _ValidateDialogState
               onPressed: () async {
                 bool validated = await BalaioService.validateUser(code);
                 if (validated) {
-                  controller.setUser();
                   Modular.to.popAndPushNamed('/home');
                 }
                 Modular.to.maybePop();
