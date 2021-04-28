@@ -62,6 +62,7 @@ class _SendDialogState extends State<SendDialog> {
   @override
   void initState() {
     loadContacts();
+    super.initState();
   }
 
   @override

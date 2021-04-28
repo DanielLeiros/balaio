@@ -69,12 +69,6 @@ class BalaioService {
         if (json.decode(response.body)['balaioId'] != null) {
           await Fluttertoast.showToast(
             msg: "Você recebeu um novo Balaio!!",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.TOP,
-            timeInSecForIosWeb: 1,
-            backgroundColor: BalaioTheme.primary,
-            textColor: BalaioTheme.white,
-            fontSize: 30.0,
           );
           controller.unreadBalaios++;
         }

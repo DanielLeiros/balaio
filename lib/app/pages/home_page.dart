@@ -4,10 +4,7 @@ import 'package:balaio/app/widget/map_view.dart';
 import 'package:balaio/app/widget/top_bar.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mobx/mobx.dart';
 
 class HomePage extends StatefulWidget {
   @override

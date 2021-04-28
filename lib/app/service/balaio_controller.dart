@@ -65,8 +65,8 @@ abstract class _BalaioControllerBase with Store {
     numero = prefs.getString('numero') ?? '';
     path = prefs.getString('path') ?? '';
     userId = prefs.getString('userId') ?? '';
-    msgNonFriends = prefs.getBool('msgNonFriends') ?? true;
     isLogged = prefs.getBool('isLogged') ?? false;
+    print('$nome $numero $userId $isLogged');
   }
 
   Future<void> userExit() async {
