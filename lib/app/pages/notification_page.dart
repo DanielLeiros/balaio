@@ -70,7 +70,10 @@ class _NotificationPageState
               ),
             ),
           ),
-          Menu(index: 3),
+          Menu(
+            index: 3,
+            controller: controller,
+          ),
         ],
       ),
     );

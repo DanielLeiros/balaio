@@ -58,6 +58,11 @@ class _MuralPageState extends ModularState<MuralPage, BalaioController> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     getMessages();
     return Scaffold(
@@ -108,7 +113,10 @@ class _MuralPageState extends ModularState<MuralPage, BalaioController> {
               ),
             ),
           ),
-          Menu(index: 2),
+          Menu(
+            index: 2,
+            controller: controller,
+          ),
         ],
       ),
     );

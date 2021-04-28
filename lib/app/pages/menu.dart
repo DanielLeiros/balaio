@@ -1,13 +1,17 @@
+import 'package:badges/badges.dart';
 import 'package:balaio/app/pages/send_dialog.dart';
+import 'package:balaio/app/service/balaio_controller.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class Menu extends StatefulWidget {
   final int index;
+  final BalaioController controller;
 
-  Menu({this.index = 0});
+  Menu({this.index = 0, required this.controller});
 
   @override
   _MenuState createState() => _MenuState();
@@ -106,18 +110,27 @@ class _MenuState extends State<Menu> {
                   Container(
                     width: size.width * 0.20,
                   ),
-                  IconButton(
-                      icon: Icon(
+                  IconButton(icon: Observer(builder: (_) {
+                    return Badge(
+                      badgeColor: BalaioTheme.primary,
+                      badgeContent: Text(
+                        widget.controller.unreadBalaios.toString(),
+                        style: TextStyle(color: BalaioTheme.white),
+                      ),
+                      showBadge: widget.controller.unreadBalaios > 0,
+                      child: Icon(
                         Icons.grid_view,
                         size: 33,
                         color: currentIndex == 2
                             ? BalaioTheme.primary
                             : BalaioTheme.gray,
                       ),
-                      onPressed: () {
-                        setBottomBarIndex(2);
-                        Modular.to.pushNamed('/mural');
-                      }),
+                    );
+                  }), onPressed: () {
+                    widget.controller.unreadBalaios = 0;
+                    setBottomBarIndex(2);
+                    Modular.to.pushNamed('/mural');
+                  }),
                   IconButton(
                       icon: Icon(
                         Icons.notifications,

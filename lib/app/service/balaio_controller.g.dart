@@ -99,6 +99,51 @@ mixin _$BalaioController on _BalaioControllerBase, Store {
     });
   }
 
+  final _$balaiosFoundAtom = Atom(name: '_BalaioControllerBase.balaiosFound');
+
+  @override
+  int get balaiosFound {
+    _$balaiosFoundAtom.reportRead();
+    return super.balaiosFound;
+  }
+
+  @override
+  set balaiosFound(int value) {
+    _$balaiosFoundAtom.reportWrite(value, super.balaiosFound, () {
+      super.balaiosFound = value;
+    });
+  }
+
+  final _$lastBalaioAtom = Atom(name: '_BalaioControllerBase.lastBalaio');
+
+  @override
+  ObservableMap<String, dynamic> get lastBalaio {
+    _$lastBalaioAtom.reportRead();
+    return super.lastBalaio;
+  }
+
+  @override
+  set lastBalaio(ObservableMap<String, dynamic> value) {
+    _$lastBalaioAtom.reportWrite(value, super.lastBalaio, () {
+      super.lastBalaio = value;
+    });
+  }
+
+  final _$unreadBalaiosAtom = Atom(name: '_BalaioControllerBase.unreadBalaios');
+
+  @override
+  int get unreadBalaios {
+    _$unreadBalaiosAtom.reportRead();
+    return super.unreadBalaios;
+  }
+
+  @override
+  set unreadBalaios(int value) {
+    _$unreadBalaiosAtom.reportWrite(value, super.unreadBalaios, () {
+      super.unreadBalaios = value;
+    });
+  }
+
   final _$getLocalSystemDataAsyncAction =
       AsyncAction('_BalaioControllerBase.getLocalSystemData');
 
@@ -134,6 +179,17 @@ mixin _$BalaioController on _BalaioControllerBase, Store {
   }
 
   @override
+  void setLastBalaio(dynamic received) {
+    final _$actionInfo = _$_BalaioControllerBaseActionController.startAction(
+        name: '_BalaioControllerBase.setLastBalaio');
+    try {
+      return super.setLastBalaio(received);
+    } finally {
+      _$_BalaioControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 map: ${map},
@@ -141,7 +197,10 @@ nome: ${nome},
 numero: ${numero},
 path: ${path},
 transientUser: ${transientUser},
-userId: ${userId}
+userId: ${userId},
+balaiosFound: ${balaiosFound},
+lastBalaio: ${lastBalaio},
+unreadBalaios: ${unreadBalaios}
     ''';
   }
 }

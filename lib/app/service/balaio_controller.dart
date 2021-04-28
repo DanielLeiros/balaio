@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:balaio/app/models/message_model.dart';
 import 'package:balaio/app/models/notification_model.dart';
 import 'package:balaio/app/service/balaio_service.dart';
 import 'package:geolocator/geolocator.dart';
@@ -30,9 +29,11 @@ abstract class _BalaioControllerBase with Store {
   @observable
   String userId = '';
   @observable
-  int balaiosEncontrados = 0;
+  int balaiosFound = 0;
   @observable
   ObservableMap<String, dynamic> lastBalaio = ObservableMap();
+  @observable
+  int unreadBalaios = 0;
 
   _BalaioControllerBase() {
     print('criando');

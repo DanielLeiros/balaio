@@ -67,7 +67,6 @@ class BalaioService {
           'longitude': loc.longitude.toString()
         });
         if (json.decode(response.body)['balaioId'] != null) {
-          controller.setLastBalaio(json.decode(response.body));
           await Fluttertoast.showToast(
             msg: "Você recebeu um novo Balaio!!",
             toastLength: Toast.LENGTH_LONG,
@@ -77,6 +76,7 @@ class BalaioService {
             textColor: BalaioTheme.white,
             fontSize: 30.0,
           );
+          controller.unreadBalaios++;
         }
         return true;
       } catch (_) {
@@ -92,7 +92,7 @@ class BalaioService {
       try {
         var response = await http.get(uri);
         List<dynamic> balaios = json.decode(response.body);
-        controller.balaiosEncontrados = balaios.length;
+        controller.balaiosFound = balaios.length;
         return balaios;
       } catch (_) {
         return [];

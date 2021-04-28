@@ -50,7 +50,9 @@ class _HomePageState extends ModularState<HomePage, BalaioController> {
               ),
             ),
           ),
-          Menu(),
+          Menu(
+            controller: controller,
+          ),
         ],
       ),
     );

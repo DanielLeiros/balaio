@@ -16,7 +16,7 @@ class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
   bool editingName = false;
   String name = '';
 
-  TextStyle subTextStyle = TextStyle(fontSize: 15, color: BalaioTheme.gray);
+  TextStyle subTextStyle = TextStyle(fontSize: 17, color: BalaioTheme.gray);
 
   void toggleEditingName() {
     setState(() {
@@ -60,7 +60,7 @@ class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
                           style: subTextStyle,
                         ),
                         Text(
-                          controller.balaiosEncontrados.toString(),
+                          controller.balaiosFound.toString(),
                           style: subTextStyle,
                         ),
                         SizedBox(
@@ -98,6 +98,7 @@ class _ProfilePageState extends ModularState<ProfilePage, BalaioController> {
           ),
           Menu(
             index: 1,
+            controller: controller,
           ),
         ],
       ),
