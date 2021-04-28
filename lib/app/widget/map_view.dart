@@ -38,8 +38,6 @@ class _MapViewState extends ModularState<MapView, BalaioController> {
     //final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     //controller.map.tileSize = 256 / devicePixelRatio;
 
-    print(controller.nome);
-    print(controller.numero);
     return GestureDetector(
       onDoubleTap: _onDoubleTap,
       onScaleStart: _onScaleStart,

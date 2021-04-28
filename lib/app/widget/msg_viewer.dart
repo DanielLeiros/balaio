@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 class MsgViewer extends StatelessWidget {
   String msg;
   String date;
+  String from;
 
-  MsgViewer({required this.date, required this.msg});
+  MsgViewer({required this.date, required this.msg, required this.from});
 
   TextStyle msgStyle = TextStyle(color: BalaioTheme.black, fontSize: 20);
   TextStyle dateStyle = TextStyle(color: BalaioTheme.gray, fontSize: 14);
@@ -24,6 +25,13 @@ class MsgViewer extends StatelessWidget {
           children: [
             TextSpan(
               text: '$msg',
+              style: msgStyle,
+            ),
+            TextSpan(
+              text: '\n\n',
+            ),
+            TextSpan(
+              text: '-$from',
               style: msgStyle,
             ),
             TextSpan(

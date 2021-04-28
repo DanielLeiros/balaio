@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
   Iterable<String?> listElements = [];
+  Function onSelect = () {};
 
-  Dropdown({required this.listElements}) : super();
+  Dropdown({required this.listElements, required this.onSelect}) : super();
 
   @override
   _DropdownState createState() => _DropdownState();
@@ -40,6 +41,7 @@ class _DropdownState extends State<Dropdown> {
                 color: Colors.deepPurpleAccent,
               ),
               onChanged: (String? newValue) {
+                widget.onSelect(newValue);
                 setState(() {
                   dropdownValue = newValue!;
                 });

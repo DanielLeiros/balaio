@@ -1,3 +1,4 @@
+import 'package:balaio/app/pages/validate_dialog.dart';
 import 'package:balaio/app/service/balaio_controller.dart';
 import 'package:balaio/app/service/balaio_service.dart';
 import 'package:balaio/app/widget/custom_input.dart';
@@ -5,7 +6,6 @@ import 'package:balaio/app/widget/circular_image.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -29,8 +29,7 @@ class _AuthPageState extends ModularState<AuthPage, BalaioController> {
 
   void confirmAuth() {
     if (fieldsOk()) {
-      controller.setUser(name, phoneNumber, '');
-      Modular.to.popAndPushNamed('/home');
+      BalaioService.createUser(name, phoneNumber);
     }
   }
 
@@ -67,7 +66,7 @@ class _AuthPageState extends ModularState<AuthPage, BalaioController> {
                     SizedBox(height: 30),
                     CustomInput(
                         fieldName: 'Número',
-                        hint: '(84) 91234-0000',
+                        hint: '+55 (84) 91234-0000',
                         onChange: (e) => setState(() => phoneNumber = e)),
                     SizedBox(height: 30),
                     Row(children: [
@@ -93,6 +92,11 @@ class _AuthPageState extends ModularState<AuthPage, BalaioController> {
                   onPressed: terms
                       ? () {
                           confirmAuth();
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return ValidateDialog();
+                              });
                         }
                       : null,
                   child: Container(

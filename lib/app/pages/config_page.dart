@@ -50,7 +50,7 @@ class _ConfigPageState extends ModularState<ConfigPage, BalaioController> {
                 ),
                 child: SingleChildScrollView(
                   child: Container(
-                    height: MediaQuery.of(context).size.height * .70,
+                    height: MediaQuery.of(context).size.height * .85,
                     padding: EdgeInsets.all(20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +63,7 @@ class _ConfigPageState extends ModularState<ConfigPage, BalaioController> {
                                 child: Text(
                                   "Receber BalaiOs apenas dos meus contatos salvos",
                                   style: TextStyle(
-                                      color: BalaioTheme.gray, fontSize: 20),
+                                      color: BalaioTheme.gray, fontSize: 22),
                                 ),
                               ),
                               Checkbox(
@@ -74,33 +74,66 @@ class _ConfigPageState extends ModularState<ConfigPage, BalaioController> {
                         SizedBox(
                           height: 20,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            controller.userExit();
-                            Modular.to.popAndPushNamed('/auth');
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 20,
-                            ),
-                            decoration: BoxDecoration(
-                                color: BalaioTheme.red,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Desconectar usuário',
-                                  style: TextStyle(
-                                    color: BalaioTheme.white,
-                                    fontSize: 18,
-                                  ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Modular.to.popAndPushNamed('/home');
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .4,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 20,
                                 ),
-                              ],
+                                decoration: BoxDecoration(
+                                    color: BalaioTheme.primary,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Voltar',
+                                      style: TextStyle(
+                                        color: BalaioTheme.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                            TextButton(
+                              onPressed: () {
+                                controller.userExit();
+                                Modular.to.popAndPushNamed('/auth');
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .4,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: BalaioTheme.red,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Desconectar usuário',
+                                      style: TextStyle(
+                                        color: BalaioTheme.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -109,7 +142,6 @@ class _ConfigPageState extends ModularState<ConfigPage, BalaioController> {
               ),
             ),
           ),
-          Menu(index: -1),
         ],
       ),
     );

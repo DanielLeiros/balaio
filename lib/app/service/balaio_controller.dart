@@ -19,45 +19,32 @@ abstract class _BalaioControllerBase with Store {
 
   @observable
   String nome = '';
+  @observable
   String numero = '';
   @observable
   String path = '';
   bool msgNonFriends = true;
   bool isLogged = false;
-  dynamic transientUser;
+  @observable
+  String transientUser = '';
+  @observable
+  String userId = '';
+  @observable
+  int balaiosEncontrados = 0;
+  @observable
+  ObservableMap<String, dynamic> lastBalaio = ObservableMap();
 
   _BalaioControllerBase() {
-    temporalLocation(3);
+    print('criando');
+    temporalLocation(5);
     getLocalSystemData();
   }
 
   @action
-  void getLocalSystemData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    nome = prefs.getString('name') ?? '';
-    numero = prefs.getString('numero') ?? '';
-    path = prefs.getString('path') ?? '';
-    msgNonFriends = prefs.getBool('msgNonFriends') ?? true;
-    isLogged = prefs.getBool('isLogged') ?? false;
-  }
-
-  void userExit() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-  }
-
-  @action
-  void setUser(String nome, String numero, String path) async {
-    print('$nome $numero $path');
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    this.nome = nome;
-    prefs.setString('name', nome);
-    this.numero = numero;
-    prefs.setString('numero', numero);
+  void setNameNumber(String name, String number, String path) {
+    nome = name;
+    numero = number;
     this.path = path;
-    prefs.setString('path', path);
-    prefs.setString('userId', transientUser['id']);
-    prefs.setBool('isLogged', true);
   }
 
   @action
@@ -66,7 +53,38 @@ abstract class _BalaioControllerBase with Store {
       dynamic loc;
       loc = await getLocation();
       map.center = LatLng(loc.latitude, loc.longitude);
+      BalaioService.searchBalaio();
     });
+  }
+
+  @action
+  Future<void> getLocalSystemData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    nome = prefs.getString('nome') ?? '';
+    numero = prefs.getString('numero') ?? '';
+    path = prefs.getString('path') ?? '';
+    userId = prefs.getString('userId') ?? '';
+    msgNonFriends = prefs.getBool('msgNonFriends') ?? true;
+    isLogged = prefs.getBool('isLogged') ?? false;
+  }
+
+  Future<void> userExit() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
+  Future<void> setUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('nome', this.nome);
+    prefs.setString('numero', this.numero);
+    prefs.setString('path', path);
+    prefs.setString('userId', transientUser);
+    prefs.setBool('isLogged', true);
+  }
+
+  @action
+  void setLastBalaio(dynamic received) {
+    lastBalaio = received;
   }
 
   Future<Position> getLocation() async {
@@ -74,45 +92,15 @@ abstract class _BalaioControllerBase with Store {
         desiredAccuracy: LocationAccuracy.high);
   }
 
-  List<Message> getMessages() {
-    return [
-      Message(
-        msg: 'Balaioooooooooooooooooooooooooooooooooooooooooooooooo \n \n -D',
-        date: '08/12/1996',
-      ),
-      Message(
-        msg: 'Andrezinhooooooooooooooooooooooooooooooooooooooooooo \n \n -W',
-        date: '08/12/1996',
-      ),
-      Message(
-        msg: 'Wislaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \n \n -A',
-        date: '08/12/1996',
-      ),
-      Message(
-        msg: 'Lorem ipsum \n \n -D',
-        date: '08/12/1996',
-      ),
-      Message(
-        msg:
-            'Mussum Ipsum, cacilds vidis litro abertis. Detraxit consequat et quo num tendi nada. Paisis, filhis, espiritis santis. Aenean aliquam molestie leo, vitae iaculis nisl. Si num tem leite então bota uma pinga aí cumpadi! \n \n -M',
-        date: '08/12/1996',
-      ),
-    ];
-  }
-
   List<NotificationM> getNotifications() {
     return [
       NotificationM(
         notification: 'Um novo balaio foi deixado para você',
-        date: '08/12/1996',
-      ),
-      NotificationM(
-        notification: 'Google iniciou uma caçada por balaio',
-        date: '08/12/1996',
+        date: '28/04/2021',
       ),
       NotificationM(
         notification: 'Bem-vindo ao BalaiO!',
-        date: '08/12/1996',
+        date: '28/04/2021',
       ),
     ];
   }

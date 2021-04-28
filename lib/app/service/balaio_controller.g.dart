@@ -24,8 +24,103 @@ mixin _$BalaioController on _BalaioControllerBase, Store {
     });
   }
 
+  final _$nomeAtom = Atom(name: '_BalaioControllerBase.nome');
+
+  @override
+  String get nome {
+    _$nomeAtom.reportRead();
+    return super.nome;
+  }
+
+  @override
+  set nome(String value) {
+    _$nomeAtom.reportWrite(value, super.nome, () {
+      super.nome = value;
+    });
+  }
+
+  final _$numeroAtom = Atom(name: '_BalaioControllerBase.numero');
+
+  @override
+  String get numero {
+    _$numeroAtom.reportRead();
+    return super.numero;
+  }
+
+  @override
+  set numero(String value) {
+    _$numeroAtom.reportWrite(value, super.numero, () {
+      super.numero = value;
+    });
+  }
+
+  final _$pathAtom = Atom(name: '_BalaioControllerBase.path');
+
+  @override
+  String get path {
+    _$pathAtom.reportRead();
+    return super.path;
+  }
+
+  @override
+  set path(String value) {
+    _$pathAtom.reportWrite(value, super.path, () {
+      super.path = value;
+    });
+  }
+
+  final _$transientUserAtom = Atom(name: '_BalaioControllerBase.transientUser');
+
+  @override
+  String get transientUser {
+    _$transientUserAtom.reportRead();
+    return super.transientUser;
+  }
+
+  @override
+  set transientUser(String value) {
+    _$transientUserAtom.reportWrite(value, super.transientUser, () {
+      super.transientUser = value;
+    });
+  }
+
+  final _$userIdAtom = Atom(name: '_BalaioControllerBase.userId');
+
+  @override
+  String get userId {
+    _$userIdAtom.reportRead();
+    return super.userId;
+  }
+
+  @override
+  set userId(String value) {
+    _$userIdAtom.reportWrite(value, super.userId, () {
+      super.userId = value;
+    });
+  }
+
+  final _$getLocalSystemDataAsyncAction =
+      AsyncAction('_BalaioControllerBase.getLocalSystemData');
+
+  @override
+  Future<void> getLocalSystemData() {
+    return _$getLocalSystemDataAsyncAction
+        .run(() => super.getLocalSystemData());
+  }
+
   final _$_BalaioControllerBaseActionController =
       ActionController(name: '_BalaioControllerBase');
+
+  @override
+  void setNameNumber(String name, String number, String path) {
+    final _$actionInfo = _$_BalaioControllerBaseActionController.startAction(
+        name: '_BalaioControllerBase.setNameNumber');
+    try {
+      return super.setNameNumber(name, number, path);
+    } finally {
+      _$_BalaioControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void temporalLocation(int interval) {
@@ -41,7 +136,12 @@ mixin _$BalaioController on _BalaioControllerBase, Store {
   @override
   String toString() {
     return '''
-map: ${map}
+map: ${map},
+nome: ${nome},
+numero: ${numero},
+path: ${path},
+transientUser: ${transientUser},
+userId: ${userId}
     ''';
   }
 }

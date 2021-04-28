@@ -1,15 +1,25 @@
 import 'package:balaio/app/pages/menu.dart';
+import 'package:balaio/app/service/balaio_controller.dart';
 import 'package:balaio/app/widget/map_view.dart';
 import 'package:balaio/app/widget/top_bar.dart';
 import 'package:balaio/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mobx/mobx.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ModularState<HomePage, BalaioController> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
